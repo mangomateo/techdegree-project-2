@@ -11,13 +11,31 @@ For assistance:
    Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
 */
 
+const studentListContainer = document.querySelector('.student-list');
+studentListContainer.innerHTML = '';
 
 
 /*
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
-
+const showPage = (list, page) => {
+   for (let i = 0; i < list.length; i++) {
+      let listItem = list[i];
+      let html = 
+      `<li class="student-item cf">
+         <div class="student-details">
+            <img class="avatar" src="${ listItem.picture.large }" alt="Profile Picture">
+            <h3>${ listItem.name.first } ${ listItem.name.last }</h3>
+            <span class="email">${ listItem.email }</span>
+         </div>
+         <div class="joined-details">
+            <span class="date">Joined ${ listItem.registered.date }</span>
+         </div>
+      </li>`;
+      studentListContainer.innerHTML += html;
+   }
+}
 
 
 /*
@@ -28,3 +46,4 @@ This function will create and insert/append the elements needed for the paginati
 
 
 // Call functions
+showPage(data);
