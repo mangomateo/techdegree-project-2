@@ -24,28 +24,32 @@ const showPage = (list, page) => {
    studentListContainer.innerHTML = '';
    
    const itemsPerPage = 9;
-   let startIndex = (page * itemsPerPage) - itemsPerPage;
-   let endIndex = page * itemsPerPage;
+
    
    // For loop to iterate over array passed into list param
    // Dynamically generates the HTML for each student's info
    for (let i = 0; i < list.length; i++) {
-      let listItem = list[i];
+      let startIndex = (page * itemsPerPage) - itemsPerPage;
+      let endIndex = page * itemsPerPage;
+
       let html = 
       `<li class="student-item cf">
          <div class="student-details">
-            <img class="avatar" src="${ listItem.picture.large }" alt="Profile Picture">
-            <h3>${ listItem.name.first } ${ listItem.name.last }</h3>
-            <span class="email">${ listItem.email }</span>
+            <img class="avatar" src="${ list[i].picture.large }" alt="Profile Picture">
+            <h3>${ list[i].name.first } ${ list[i].name.last }</h3>
+            <span class="email">${ list[i].email }</span>
          </div>
          <div class="joined-details">
-            <span class="date">Joined ${ listItem.registered.date }</span>
+            <span class="date">Joined ${ list[i].registered.date }</span>
          </div>
       </li>`;
 
       if (i >= startIndex && i < endIndex) {
          studentListContainer.innerHTML += html;
+      } else {
+         page++;
       }
+
       
    }
 }
