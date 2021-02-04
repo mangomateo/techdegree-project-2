@@ -46,8 +46,6 @@ const showPage = (list, page) => {
 
       if (i >= startIndex && i < endIndex) {
          studentListContainer.innerHTML += html;
-      } else {
-         page++;
       }
 
       
@@ -74,6 +72,23 @@ const addPagination = list => {
 
       linkListContainer.insertAdjacentHTML('beforeend', buttonHTML);
    }
+
+   linkListContainer.firstElementChild.firstElementChild.classList = 'active';
+
+   // Listen for clicks on buttons, and run showPage() with the new page# as a param
+   linkListContainer.addEventListener('click', (e) => {
+      let buttonGroup = linkListContainer.children;
+      
+      if (e.target.tagName === 'BUTTON') {
+         showPage(list, parseInt(e.target.textContent));
+         
+         for (let i = 0; i < buttonGroup.length; i++) {
+            buttonGroup[i].firstElementChild.classList = '';
+         }
+         
+         e.target.classList = 'active';         
+      }
+   }); 
 };
 
 
