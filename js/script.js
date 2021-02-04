@@ -11,8 +11,7 @@ For assistance:
    Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
 */
 
-const studentListContainer = document.querySelector('.student-list');
-studentListContainer.innerHTML = '';
+
 
 
 /*
@@ -20,6 +19,16 @@ Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
 const showPage = (list, page) => {
+
+   const studentListContainer = document.querySelector('.student-list');
+   studentListContainer.innerHTML = '';
+   
+   const itemsPerPage = 9;
+   let startIndex = (page * itemsPerPage) - itemsPerPage;
+   let endIndex = page * itemsPerPage;
+   
+   // For loop to iterate over array passed into list param
+   // Dynamically generates the HTML for each student's info
    for (let i = 0; i < list.length; i++) {
       let listItem = list[i];
       let html = 
@@ -33,7 +42,11 @@ const showPage = (list, page) => {
             <span class="date">Joined ${ listItem.registered.date }</span>
          </div>
       </li>`;
-      studentListContainer.innerHTML += html;
+
+      if (i >= startIndex && i < endIndex) {
+         studentListContainer.innerHTML += html;
+      }
+      
    }
 }
 
@@ -46,4 +59,4 @@ This function will create and insert/append the elements needed for the paginati
 
 
 // Call functions
-showPage(data);
+showPage(data, 1);
